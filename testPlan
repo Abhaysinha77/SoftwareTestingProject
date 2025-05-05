@@ -1,0 +1,112 @@
+🧾 Test Plan: VWO Login Page Functionality
+Application: https://vwo.com
+Module: Login Page
+Prepared by: [Your Name], Sr. Manual Test Specialist
+Reviewed by: QA Lead Panel
+Version: 1.1
+Date: 2025-05-05
+
+1. 🎯 Objective
+To validate the login functionality of the VWO web application by verifying correct behavior with valid and invalid input data, ensuring secure authentication, proper user redirection, and compliance with usability and security standards.
+
+2. 🔍 Scope
+In Scope:
+Input validation for email and password fields
+
+UI functionality (buttons, form handling)
+
+Successful and failed login attempts
+
+Error messages and security behavior
+
+Browser compatibility checks (desktop/mobile)
+
+Out of Scope:
+Forgot Password functionality
+
+Multi-Factor Authentication (MFA)
+
+Post-login dashboard features
+
+Backend service/API testing
+
+3. ✅ Assumptions
+Test user accounts (valid/invalid) are already provisioned.
+
+MFA and CAPTCHA are disabled for the purpose of functional testing.
+
+Testing is done on staging or pre-production environment.
+
+Time and session settings are consistent across browsers.
+
+Application uses secure HTTPS connection on all environments.
+
+4. 🧪 Test Strategy
+Test Type	Description
+Positive Testing	Validate successful login with correct credentials.
+Negative Testing	Validate handling of incorrect, blank, or invalid inputs.
+UI Validation	Ensure field alignment, placeholders, and button behavior are consistent.
+Security Checks	Manual verification of SQL/XSS attempts and login throttling.
+Responsive Testing	Confirm layout and behavior across browsers/devices.
+Usability Checks	Validate error messages, labels, and accessibility cues.
+
+5. 📋 Key Test Scenarios
+ID	Test Case Description	Input	Expected Result
+TC01	Login with valid credentials	valid_user@example.com / validPass123	Redirect to dashboard
+TC02	Blank email field	"" / validPass123	Show “Email is required”
+TC03	Blank password field	valid_user@example.com / ""	Show “Password is required”
+TC04	Invalid credentials	wrong_user@example.com / wrongPass	Show generic error message
+TC05	Invalid email format	user@com	Show “Enter a valid email”
+TC06	Email with leading/trailing spaces	" user@example.com " / validPass123	Trim spaces and login successfully
+TC07	Case-insensitive email	USER@example.com / validPass123	Login successful
+TC08	SQL Injection attempt	' OR 1=1-- / any	Show generic error, no access
+TC09	XSS script in email field	<script>alert(1)</script>	Input sanitized, no script executed
+TC10	Multiple failed attempts	5+ incorrect logins	Show lockout message or throttle
+TC11	Login on unsupported browser	IE11	Show unsupported browser message or graceful fallback
+
+6. 🧪 Test Environment
+Test URL: https://staging.vwo.com/login
+
+Browsers: Chrome 120+, Firefox 122+, Edge 118+
+
+Devices: Windows 11, macOS Sonoma, Android (Chrome), iOS Safari
+
+Tools: DevTools, TestRail, Jira, Postman (for cookie/header checks)
+
+7. ✅ Entry and Exit Criteria
+Entry Criteria:
+Login page is deployed and accessible in test environment
+
+All backend services (auth, session) are stable
+
+Test data is ready and reviewed
+
+Exit Criteria:
+100% execution of high-priority scenarios
+
+No open critical or high-severity bugs
+
+Test summary and defect reports submitted
+
+8. ⚠️ Risk & Mitigation
+Risk	Mitigation
+Unavailable test accounts	Coordinate with DevOps/BA to seed data early
+Frequent build updates	Freeze login module during test cycle
+Inconsistent browser rendering	Begin compatibility tests early in cycle
+
+9. 📦 Deliverables
+Approved Test Plan (this document)
+
+Test Case Suite (Excel/TestRail)
+
+Defect Reports with screenshots/logs
+
+Final Test Summary Report
+
+10. 🗓️ Test Schedule
+Activity	Start Date	End Date
+Planning & Preparation	May 5	May 5
+Test Case Design	May 5	May 6
+Execution	May 7	May 8
+Defect Retesting	May 8	May 9
+Test Closure & Summary	May 9	May 9
