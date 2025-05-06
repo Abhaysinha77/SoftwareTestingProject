@@ -17,7 +17,8 @@ v2.0	2025-05-02	QA Review Board	Optimized Test Scenarios
 v3.0	2025-05-06	Lead QA Architect	Finalized after stakeholder review
 
 3. Objective
-To validate the functional correctness, UI/UX quality, security, data integrity, and workflow consistency of the user authentication, dashboard, and customer creation features in VWO.com. The goal is to establish confidence in the core user journeys before deployment.
+To validate the functional correctness, UI/UX quality, security, data integrity, and workflow consistency of the user authentication, 
+dashboard, and customer creation features in VWO.com. The goal is to establish confidence in the core user journeys before deployment.
 
 4. Scope
 ✅ In Scope
