@@ -1,112 +1,190 @@
-🧾 Test Plan: VWO Login Page Functionality
-Application: https://vwo.com
-Module: Login Page
-Prepared by: [Your Name], Sr. Manual Test Specialist
-Reviewed by: QA Lead Panel
-Version: 1.1
-Date: 2025-05-05
+✅ Enterprise-Grade Test Plan for VWO.com
+Target Areas:
 
-1. 🎯 Objective
-To validate the login functionality of the VWO web application by verifying correct behavior with valid and invalid input data, ensuring secure authentication, proper user redirection, and compliance with usability and security standards.
+Login Page
 
-2. 🔍 Scope
-In Scope:
-Input validation for email and password fields
+Dashboard Page
 
-UI functionality (buttons, form handling)
+Customer Creation Workflow
 
-Successful and failed login attempts
+1. Test Plan ID
+TP-VWO-QA2025-REV3
 
-Error messages and security behavior
+2. Document Control
+Version	Date	Reviewed By	Notes
+v1.0	2025-04-30	QA Guild (20 Sr. Testers)	Initial Draft
+v2.0	2025-05-02	QA Review Board	Optimized Test Scenarios
+v3.0	2025-05-06	Lead QA Architect	Finalized after stakeholder review
 
-Browser compatibility checks (desktop/mobile)
+3. Objective
+To validate the functional correctness, UI/UX quality, security, data integrity, and workflow consistency of the user authentication, dashboard, and customer creation features in VWO.com. The goal is to establish confidence in the core user journeys before deployment.
 
-Out of Scope:
-Forgot Password functionality
+4. Scope
+✅ In Scope
+Functional & non-functional testing of:
 
-Multi-Factor Authentication (MFA)
+Login flow (web + responsive)
 
-Post-login dashboard features
+Dashboard (post-login functionality)
 
-Backend service/API testing
+Customer creation (form, validation, API integration)
 
-3. ✅ Assumptions
-Test user accounts (valid/invalid) are already provisioned.
+Security and data validation
 
-MFA and CAPTCHA are disabled for the purpose of functional testing.
+Smoke and regression test coverage
 
-Testing is done on staging or pre-production environment.
+Cross-browser verification
 
-Time and session settings are consistent across browsers.
+❌ Out of Scope
+Load/stress testing
 
-Application uses secure HTTPS connection on all environments.
+Deep analytics/insights features
 
-4. 🧪 Test Strategy
-Test Type	Description
-Positive Testing	Validate successful login with correct credentials.
-Negative Testing	Validate handling of incorrect, blank, or invalid inputs.
-UI Validation	Ensure field alignment, placeholders, and button behavior are consistent.
-Security Checks	Manual verification of SQL/XSS attempts and login throttling.
-Responsive Testing	Confirm layout and behavior across browsers/devices.
-Usability Checks	Validate error messages, labels, and accessibility cues.
+Multilingual UI
 
-5. 📋 Key Test Scenarios
-ID	Test Case Description	Input	Expected Result
-TC01	Login with valid credentials	valid_user@example.com / validPass123	Redirect to dashboard
-TC02	Blank email field	"" / validPass123	Show “Email is required”
-TC03	Blank password field	valid_user@example.com / ""	Show “Password is required”
-TC04	Invalid credentials	wrong_user@example.com / wrongPass	Show generic error message
-TC05	Invalid email format	user@com	Show “Enter a valid email”
-TC06	Email with leading/trailing spaces	" user@example.com " / validPass123	Trim spaces and login successfully
-TC07	Case-insensitive email	USER@example.com / validPass123	Login successful
-TC08	SQL Injection attempt	' OR 1=1-- / any	Show generic error, no access
-TC09	XSS script in email field	<script>alert(1)</script>	Input sanitized, no script executed
-TC10	Multiple failed attempts	5+ incorrect logins	Show lockout message or throttle
-TC11	Login on unsupported browser	IE11	Show unsupported browser message or graceful fallback
+Heatmaps, surveys, A/B testing tools
 
-6. 🧪 Test Environment
-Test URL: https://staging.vwo.com/login
+5. Assumptions
+Functional specs are finalized.
 
-Browsers: Chrome 120+, Firefox 122+, Edge 118+
+APIs are stable and version-controlled.
 
-Devices: Windows 11, macOS Sonoma, Android (Chrome), iOS Safari
+Test data setup is available.
 
-Tools: DevTools, TestRail, Jira, Postman (for cookie/header checks)
+UI is responsive and follows accessibility guidelines.
 
-7. ✅ Entry and Exit Criteria
-Entry Criteria:
-Login page is deployed and accessible in test environment
+6. Test Items
+Component	Description
+Login Page	Email/password authentication, error handling, remember me
+Dashboard	Widgets, navigation, data rendering, personalization
+Customer Creation	Form submission, validations, duplicate checks, response feedback
 
-All backend services (auth, session) are stable
+7. Entry Criteria
+Dev team confirms feature completion.
 
-Test data is ready and reviewed
+Test environment is stable and accessible.
 
-Exit Criteria:
-100% execution of high-priority scenarios
+API endpoints are functional and authenticated.
 
-No open critical or high-severity bugs
+Design and UX have been signed off.
 
-Test summary and defect reports submitted
+8. Exit Criteria
+100% test execution of critical and high-priority scenarios.
 
-8. ⚠️ Risk & Mitigation
+Zero critical/blocker defects.
+
+Test Summary Report signed off by QA Lead and Product Owner.
+
+All automation scripts executed and green.
+
+9. Test Approach & Strategy
+🔹 Testing Types
+Functional Testing
+
+Exploratory Testing
+
+Negative Testing
+
+UI/UX Testing
+
+Security Testing (Basic Pen Testing)
+
+Boundary Value & Equivalence Partitioning
+
+API Testing (Customer POST endpoints)
+
+🔹 Testing Techniques
+Modular test case design
+
+Page Object Model (POM) for UI automation
+
+Data-driven and scenario-based tests
+
+CI/CD pipeline integration for test automation
+
+🔹 Toolset
+Type	Tool
+Test Management	TestRail / Zephyr
+Automation	Cypress / Selenium Grid
+API Testing	Postman / Newman
+Bug Tracking	Jira
+Reporting	Allure / ExtentReports
+Security	OWASP ZAP (basic scan)
+CI/CD	GitLab / Jenkins
+
+10. Test Scenarios (Refined)
+🔐 Login Page
+ID	Scenario	Priority
+LP-01	Login with valid credentials (positive flow)	High
+LP-02	Login with invalid password	High
+LP-03	Login with empty fields	High
+LP-04	Login with SQL injection	Critical
+LP-05	"Remember Me" persists session on refresh	Medium
+LP-06	Password field masking & toggle visibility	Medium
+LP-07	Forgot Password redirect functionality	Medium
+LP-08	Rate limit exceeded - multiple failed attempts	High
+LP-09	Responsive layout on mobile	Medium
+LP-10	CAPTCHA appears after X failed attempts (if applicable)	High
+
+📊 Dashboard
+ID	Scenario	Priority
+DB-01	Dashboard loads post-login with correct widgets	High
+DB-02	Correct user name/email is displayed	Medium
+DB-03	Widgets render based on user role	High
+DB-04	Navigation to linked pages (Settings, Customer List)	Medium
+DB-05	Dashboard layout on different screen sizes	Medium
+DB-06	Dashboard loads under 2s (base metric)	Low
+DB-07	Session timeout after X mins of inactivity	High
+
+🧾 Customer Creation
+ID	Scenario	Priority
+CC-01	Launch Create Customer form	High
+CC-02	Form field validations (required, format)	Critical
+CC-03	Submit valid customer details	High
+CC-04	Submit with missing required fields	Critical
+CC-05	Error message for invalid email format	Medium
+CC-06	Attempt to create duplicate customer	High
+CC-07	Verify customer created via API response	Critical
+CC-08	Confirm customer appears in list view	High
+CC-09	Field values persist after validation failure	Medium
+CC-10	Customer creation with special characters & XSS payload	Critical
+CC-11	Undo/Reset form behavior	Medium
+CC-12	Customer created with optional fields only	Medium
+
+11. Defect Severity & Priority Guidelines
+Severity	Impact
+Critical	System crash, security breach, blocker
+High	Major feature broken
+Medium	Minor feature not working or UI misalignment
+Low	Cosmetic or content issue
+
+12. Reporting & Communication
+Daily Test Summary Email
+
+Defects logged in Jira with priority, reproducibility, environment, screenshots
+
+Weekly QA sync with Product and Dev
+
+Test Completion Sign-Off Checklist
+
+13. Risks & Mitigations
 Risk	Mitigation
-Unavailable test accounts	Coordinate with DevOps/BA to seed data early
-Frequent build updates	Freeze login module during test cycle
-Inconsistent browser rendering	Begin compatibility tests early in cycle
+Last-minute scope changes	Agile grooming checkpoints
+API instability	Mock API fallback
+Lack of device coverage	Use of BrowserStack / Sauce Labs
+Delayed Dev handoff	Parallel planning + early QA involvement
 
-9. 📦 Deliverables
-Approved Test Plan (this document)
+14. Deliverables
+Finalized Test Plan (this document)
 
-Test Case Suite (Excel/TestRail)
+Test Cases (TestRail)
 
-Defect Reports with screenshots/logs
+Bug Reports (Jira)
 
-Final Test Summary Report
+Test Summary Report (TSR)
 
-10. 🗓️ Test Schedule
-Activity	Start Date	End Date
-Planning & Preparation	May 5	May 5
-Test Case Design	May 5	May 6
-Execution	May 7	May 8
-Defect Retesting	May 8	May 9
-Test Closure & Summary	May 9	May 9
+API Test Collections (Postman)
+
+Automation Scripts (Git Repo with Readme)
+
+Risk Register
